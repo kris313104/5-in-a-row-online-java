@@ -18,23 +18,24 @@ public class Menu extends JFrame {
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        JButton singlePlayerButton = createStyledButton("Singleplayer");
+        JButton singlePC = createStyledButton("Single PC game");
         JButton multiPlayerButton = createStyledButton("Multiplayer");
-        JButton sandboxButton = createStyledButton("Sandbox");
 
-
-        addHoverEffect(singlePlayerButton);
+        addHoverEffect(singlePC);
         addHoverEffect(multiPlayerButton);
-        addHoverEffect(sandboxButton);
 
-        sandboxButton.addActionListener(e -> {
+        singlePC.addActionListener(e -> {
             SwingUtilities.invokeLater(FiveInRow::new);
             dispose();
         });
 
-        buttonPanel.add(singlePlayerButton);
+        multiPlayerButton.addActionListener(e -> {
+            GenerateCodeWindow generateCodeWindow = new GenerateCodeWindow();
+        });
+
+        buttonPanel.add(singlePC);
         buttonPanel.add(multiPlayerButton);
-        buttonPanel.add(sandboxButton);
+
 
         add(buttonPanel, BorderLayout.CENTER);
         setVisible(true);

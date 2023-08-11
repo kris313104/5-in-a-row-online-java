@@ -35,13 +35,13 @@ public class FiveInRow implements ActionListener {
 
         textfield1.setHorizontalAlignment(JLabel.LEFT); // Align to the left
         textfield1.setVerticalAlignment(JLabel.TOP); // Align to the top
-        textfield1.setFont(new Font("Ink Free", Font.BOLD, 70));
+        textfield1.setFont(new Font("Arial", Font.PLAIN, 60));
         textfield1.setForeground(new Color(125, 155, 150));
         textfield1.setOpaque(true);
 
         textfield2.setHorizontalAlignment(JLabel.CENTER);
         textfield2.setVerticalAlignment(JLabel.CENTER);
-        textfield2.setFont(new Font("Ink Free", Font.BOLD, 70));
+        textfield2.setFont(new Font("Arial", Font.PLAIN, 60));
         textfield2.setForeground(new Color(125, 155, 150));
         textfield2.setOpaque(true);
 
