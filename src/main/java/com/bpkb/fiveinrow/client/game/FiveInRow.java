@@ -4,8 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class FiveInRow implements ActionListener {
+
+    Random random = new Random();
+    boolean player1_turn;
 
     private JFrame mainFrame = new JFrame();
     private JPanel titlePanel = new JPanel();
@@ -21,7 +25,7 @@ public class FiveInRow implements ActionListener {
 
     private void initializeUI() {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(1000, 950); // Increased height for text fields
+        mainFrame.setSize(1000, 800);
         mainFrame.setResizable(false);
         mainFrame.getContentPane().setBackground(new Color(50, 50, 50));
         mainFrame.setLayout(new BorderLayout());
@@ -66,13 +70,47 @@ public class FiveInRow implements ActionListener {
         }
     }
 
+
+
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(FiveInRow::new);
+//    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < buttons.length; i++) {
+            if (e.getSource() == buttons[i]) {
+                if (player1_turn) {
+                    if (buttons[i].getText().equals("")) {
+                        buttons[i].setForeground(new Color(235, 219, 240));
+                        buttons[i].setText("X");
+                        player1_turn = false;
+                        textfield2.setText("Player 2 (O) turn");
 
+                    }
+                } else {
+                    if (buttons[i].getText().equals("")) {
+                        buttons[i].setForeground(new Color(235, 219, 240));
+                        buttons[i].setText("O");
+                        player1_turn = true;
+                        textfield2.setText("Player 1 (X) turn");
 
+                    }
+                }
+            }
+        }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(FiveInRow::new);
+
+    public void firstTurn(){
+        if(random.nextInt(2)==0){
+            player1_turn = true;
+            textfield2.setText("X turn");
+        } else {
+            player1_turn = false;
+            textfield2.setText("O turn");
+        }
     }
+
 }
