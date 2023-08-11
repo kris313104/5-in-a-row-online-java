@@ -17,6 +17,9 @@ public class FiveinrowApplicationHostingTest {
 		host = new ServerHost(aArgs);
 		FiveinrowApplicationHostingTest app = new FiveinrowApplicationHostingTest();
 		app.buildAndDisplayGui();
+
+		System.out.println(host.generateRoomCode(6));
+
 	}
 
 	// PRIVATE
