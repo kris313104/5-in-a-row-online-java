@@ -2,7 +2,10 @@ package com.bpkb.fiveinrow.server.runner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 class ServerThread extends Thread {
@@ -21,5 +24,12 @@ class ServerThread extends Thread {
     public void interrupt() {
         context.close();
         super.interrupt();
+    }
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+        // Customize the port here
+        return factory -> {
+            factory.setPort(2137); // Change to your desired port
+        };
     }
 }
