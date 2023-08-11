@@ -1,5 +1,7 @@
 package com.bpkb.fiveinrow.client.game;
 
+import com.bpkb.fiveinrow.server.runner.ServerHost;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

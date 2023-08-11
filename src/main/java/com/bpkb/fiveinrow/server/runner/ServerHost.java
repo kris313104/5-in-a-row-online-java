@@ -4,15 +4,15 @@ import java.util.Random;
 
 //@SpringBootApplication
 public class ServerHost {
+    private static final int ROOM_CODE_LENGTH = 6;
     private ServerThread serverThread;
-    //    public static void main(String[] args) {
-//        SpringApplication.run(ServerApp.class, args);
-//    }
+    private static String roomCode;
     public static String[] args;
 
 
     public ServerHost(String[] args) {
         ServerHost.args = args;
+        roomCode = generateRoomCode(ROOM_CODE_LENGTH);
     }
 
     public void runHostingServer() {
@@ -26,14 +26,18 @@ public class ServerHost {
         System.out.println("Server stopped");
     }
 
-    public String generateRoomCode(int codeLength) {
+    public static String getRoomCode() {
+        return roomCode;
+    }
+
+    private static String generateRoomCode(int codeLength) {
         StringBuilder returnCodeBuilder = new StringBuilder();
 
         while (returnCodeBuilder.length() <= codeLength) {
-            System.out.println((int)(Math.random() * 25 + 65));
+//            System.out.println((int)(Math.random() * 25 + 65));
             returnCodeBuilder.append((char) (int)(Math.random() * 25 + 65));
         }
-
+        System.out.println(returnCodeBuilder.toString());
         return returnCodeBuilder.toString();
     }
 

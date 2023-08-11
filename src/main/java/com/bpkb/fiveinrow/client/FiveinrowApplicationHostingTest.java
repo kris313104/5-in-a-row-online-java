@@ -18,7 +18,7 @@ public class FiveinrowApplicationHostingTest {
 		FiveinrowApplicationHostingTest app = new FiveinrowApplicationHostingTest();
 		app.buildAndDisplayGui();
 
-		System.out.println(host.generateRoomCode(6));
+//		System.out.println(host.generateRoomCode(6));
 
 	}
 

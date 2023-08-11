@@ -1,5 +1,7 @@
 package com.bpkb.fiveinrow.client.game;
 
+import com.bpkb.fiveinrow.server.runner.ServerHost;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,9 @@ import java.awt.event.ActionListener;
 
 public class GenerateCodeWindow extends JFrame {
     private JTextField codeTextField;
+
+    private static ServerHost host;
+
 
     public GenerateCodeWindow() {
         setTitle("Generate Code");
@@ -18,10 +23,11 @@ public class GenerateCodeWindow extends JFrame {
         JButton generateHost = new JButton("Host game");
         JButton connectButton = new JButton("Connect and play");
 
+        host = new ServerHost(ServerHost.args);
         generateHost.addActionListener(e -> {
             //code generation logic here
-//                String generatedCode = Integer.toString((int) (Math.random() * 10000));
-//                codeTextField.setText(generatedCode);
+                host.runHostingServer();
+                codeTextField.setText(ServerHost.getRoomCode());
         });
 
         connectButton.addActionListener(e -> {
