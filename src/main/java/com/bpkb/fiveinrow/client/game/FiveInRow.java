@@ -76,32 +76,49 @@ public class FiveInRow implements ActionListener {
 //        SwingUtilities.invokeLater(FiveInRow::new);
 //    }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < buttons.length; i++) {
             if (e.getSource() == buttons[i]) {
-                if (player1_turn) {
-                    if (buttons[i].getText().equals("")) {
+                if (buttons[i].getText().equals("")) {
+                    if (player1_turn) {
                         buttons[i].setForeground(new Color(235, 219, 240));
                         buttons[i].setText("X");
-                        player1_turn = false;
                         textfield2.setText("Player 2 (O) turn");
-
-                    }
-                } else {
-                    if (buttons[i].getText().equals("")) {
+                    } else {
                         buttons[i].setForeground(new Color(235, 219, 240));
                         buttons[i].setText("O");
-                        player1_turn = true;
                         textfield2.setText("Player 1 (X) turn");
-
                     }
+
+                    // Check for a win after the move
+                    char playerSymbol = player1_turn ? 'X' : 'O';
+                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, playerSymbol)) {
+                        if (player1_turn) {
+                            textfield2.setText("Player 1 (X) wins!");
+                        } else {
+                            textfield2.setText("Player 2 (O) wins!");
+                        }
+                        disableButtons(); // Disable buttons after a win
+                    }
+
+                    player1_turn = !player1_turn;
                 }
             }
         }
     }
 
+    private char[][] getCurrentBoardState() {
+        char[][] board = new char[15][15];
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i].getText().equals("X")) {
+                board[i / 15][i % 15] = 'X';
+            } else if (buttons[i].getText().equals("O")) {
+                board[i / 15][i % 15] = 'O';
+            }
+        }
+        return board;
+    }
 
     public void firstTurn(){
         if(random.nextInt(2)==0){
@@ -112,5 +129,9 @@ public class FiveInRow implements ActionListener {
             textfield2.setText("O turn");
         }
     }
-
+    private void disableButtons() {
+        for (JButton button : buttons) {
+            button.setEnabled(false);
+        }
+    }
 }
