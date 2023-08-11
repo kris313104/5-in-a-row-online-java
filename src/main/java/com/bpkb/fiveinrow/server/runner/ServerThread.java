@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 class ServerThread extends Thread {
-    private String[] args;
+    private final String[] args;
     private ConfigurableApplicationContext context;
 
     public ServerThread(String[] args){
