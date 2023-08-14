@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LobbyController {
     private final String roomCode = ServerHost.getRoomCode();
-    private int playerCount = 0;
+    private int playerCount = 1;
 
 
     @GetMapping("/{roomCode}/create")

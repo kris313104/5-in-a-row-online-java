@@ -30,9 +30,9 @@ class ServerThread extends Thread {
     }
     @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
-        // Customize the port here
+
         return factory -> {
-            factory.setPort(2137); // Change to your desired port
+            factory.setPort(2137);
         };
     }
 }

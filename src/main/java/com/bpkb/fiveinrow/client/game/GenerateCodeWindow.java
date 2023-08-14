@@ -2,10 +2,17 @@ package com.bpkb.fiveinrow.client.game;
 
 import com.bpkb.fiveinrow.server.runner.ServerHost;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class GenerateCodeWindow extends JFrame {
     private JTextField codeTextField;
@@ -28,11 +35,33 @@ public class GenerateCodeWindow extends JFrame {
             //code generation logic here
                 host.runHostingServer();
                 codeTextField.setText(ServerHost.getRoomCode());
+                codeTextField.setEnabled(false);
+                generateHost.setEnabled(false);
+                connectButton.setEnabled(false);
+
+
         });
 
         connectButton.addActionListener(e -> {
             // tu do connect and play
+            HttpURLConnection connection;
+            try {
+                String joinURLString = new StringBuilder("http://localhost:2137/").append(codeTextField.getText()).append("/join").toString();
+                URL joinURL = new URL(joinURLString);
 
+                URLConnection yc = joinURL.openConnection();
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(
+                                yc.getInputStream()));
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null)
+                    System.out.println(inputLine);
+                in.close();
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
         });
 
