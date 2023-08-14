@@ -1,6 +1,8 @@
 package com.bpkb.fiveinrow.client.game;
 
 
+import com.bpkb.fiveinrow.client.FiveinrowApplication;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,7 @@ public class Menu extends JFrame {
     public Menu() {
         setTitle("Five in a Row Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        FiveinrowApplication.openWindows.add(this);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());

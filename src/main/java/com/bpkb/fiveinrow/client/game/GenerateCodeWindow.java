@@ -1,30 +1,36 @@
 package com.bpkb.fiveinrow.client.game;
 
+import com.bpkb.fiveinrow.client.FiveinrowApplication;
+import com.bpkb.fiveinrow.server.host.ClientGame;
+import com.bpkb.fiveinrow.server.host.HostGame;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GenerateCodeWindow extends JFrame {
-    private JTextField codeTextField;
-
-
-
+    private JTextField ipTextField;
+    private JTextField portTextField;
+    private volatile JLabel infoLabel;
 
     public GenerateCodeWindow() {
         setTitle("Generate Code");
-        setSize(300, 150);
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        FiveinrowApplication.openWindows.add(this);
 
-        JLabel codeLabel = new JLabel("Enter code: ");
-        codeTextField = new JTextField(15);
+        JLabel ipLabel = new JLabel("Enter ip address: ");
+        ipTextField = new JTextField(16);
+        JLabel portLabel = new JLabel("Enter port");
+        portTextField = new JTextField(6);
+        infoLabel = new JLabel();
         JButton generateHost = new JButton("Host game");
         JButton connectButton = new JButton("Connect and play");
 
@@ -32,58 +38,67 @@ public class GenerateCodeWindow extends JFrame {
         generateHost.addActionListener(e -> {
             //code generation logic here
 
-//            codeTextField.setEnabled(false);
-            generateHost.setEnabled(false);
-            connectButton.setEnabled(false);
 
-//            HttpURLConnection connection;
-//            try {
-//
-//                String joinURLString = new StringBuilder("http://localhost:2137/").append(codeTextField.getText()).append("/create").toString();
-//                URL joinURL = new URL(joinURLString);
-//
-//                URLConnection yc = joinURL.openConnection();
-//                BufferedReader in = new BufferedReader(
-//                        new InputStreamReader(
-//                                yc.getInputStream()));
-//                String inputLine;
-//
-//                while ((inputLine = in.readLine()) != null)
-//                    System.out.println(inputLine);
-//                in.close();
-//
-//            } catch (IOException | InterruptedException ex) {
-//                throw new RuntimeException(ex);
-//            }
+
+            try {
+                int port = Integer.parseInt(portTextField.getText());
+
+                Thread thread = new Thread(() -> {
+                    HostGame hostGame = new HostGame();
+                    hostGame.initConnection(port);
+                    for (JFrame window : FiveinrowApplication.openWindows) {
+                        window.dispose();
+                    }
+                });
+//                for (JFrame window : FiveinrowApplication.openWindows) {
+//                    window.dispose();
+//                }
+                thread.start();
+
+//                this.dispose();
+                generateHost.setEnabled(false);
+                connectButton.setEnabled(false);
+
+            } catch (NumberFormatException ex) {
+                System.out.println(ex);
+                infoLabel.setText("Invalid port");
+            }
+
 
         });
 
         connectButton.addActionListener(e -> {
             // tu do connect and play
-            HttpURLConnection connection;
             try {
-                String joinURLString = new StringBuilder("http://localhost:2137/").append(codeTextField.getText()).append("/join").toString();
-                URL joinURL = new URL(joinURLString);
+                String ip = ipTextField.getText();
+                int port = Integer.parseInt(portTextField.getText());
+                Thread thread = new Thread(() -> {
+                    ClientGame clientGame = new ClientGame();
+                    clientGame.initConnection(ip, port);
 
-                URLConnection yc = joinURL.openConnection();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                                yc.getInputStream()));
-                String inputLine;
+                });
+//                for (JFrame window : FiveinrowApplication.openWindows) {
+//                    window.dispose();
+//                }
 
-                while ((inputLine = in.readLine()) != null)
-                    System.out.println(inputLine);
-                in.close();
+                thread.start();
 
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+//                this.dispose();
+                generateHost.setEnabled(false);
+                connectButton.setEnabled(false);
+
+            } catch (NumberFormatException ex) {
+                System.out.println(ex);
+                infoLabel.setText("Invalid port");
             }
-
         });
 
         JPanel panel = new JPanel(new GridLayout(3, 1));
-        panel.add(codeLabel);
-        panel.add(codeTextField);
+        panel.add(ipLabel);
+        panel.add(ipTextField);
+        panel.add(portLabel);
+        panel.add(portTextField);
+        panel.add(infoLabel);
         panel.add(generateHost);
         panel.add(connectButton);
 
@@ -93,7 +108,9 @@ public class GenerateCodeWindow extends JFrame {
     }
 
     public String getCode() {
-        return codeTextField.getText();
+        return ipTextField.getText();
     }
+
+
 }
 
