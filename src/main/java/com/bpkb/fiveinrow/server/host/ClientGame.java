@@ -1,20 +1,31 @@
 package com.bpkb.fiveinrow.server.host;
 
+import com.bpkb.fiveinrow.client.FiveinrowApplication;
+import com.bpkb.fiveinrow.client.game.FiveInRow;
+import com.bpkb.fiveinrow.client.game.GenerateCodeWindow;
+
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Client {
-    public static void main(String[] args) {
+public class ClientGame {
+    public void initConnection(String host, int port){
+
         try {
-            Socket socket = new Socket("localhost", 12345); // Server address and port
+            Socket socket = new Socket(host, port); // Server address and port
 
             // Create a thread for receiving messages from the server asynchronously
             Thread receiveThread = new Thread(() -> {
+
                 try {
+
+                    SwingUtilities.invokeLater(FiveInRow::new);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String message;
                     while ((message = reader.readLine()) != null) {
                         System.out.println("Server: " + message);
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
