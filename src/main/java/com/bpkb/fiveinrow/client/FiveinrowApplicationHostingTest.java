@@ -1,7 +1,5 @@
 package com.bpkb.fiveinrow.client;
 
-import com.bpkb.fiveinrow.server.runner.ServerHost;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -11,10 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
 public class FiveinrowApplicationHostingTest {
-	private static ServerHost host;
 
 	public static void main(String... aArgs){
-		host = new ServerHost(aArgs);
+
 		FiveinrowApplicationHostingTest app = new FiveinrowApplicationHostingTest();
 		app.buildAndDisplayGui();
 
@@ -41,7 +38,7 @@ public class FiveinrowApplicationHostingTest {
 
 		JButton closeButton = new JButton("Stop server");
 		closeButton.addActionListener(e -> {
-			host.stopHostingServer();
+
 		});
 		panel.add(closeButton);
 
@@ -59,7 +56,7 @@ public class FiveinrowApplicationHostingTest {
 
 		@Override
 		public void actionPerformed(ActionEvent aEvent) {
-			host.runHostingServer();
+
 			JOptionPane.showMessageDialog(fFrame, "running spring app");
 		}
 
