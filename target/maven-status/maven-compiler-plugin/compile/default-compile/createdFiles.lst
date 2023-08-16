@@ -1,0 +1,11 @@
+com\bpkb\fiveinrow\client\game\FiveInRow.class
+com\bpkb\fiveinrow\client\game\AIplayer.class
+com\bpkb\fiveinrow\client\game\Menu$1.class
+com\bpkb\fiveinrow\client\FiveinrowApplication.class
+com\bpkb\fiveinrow\server\host\HostGame.class
+com\bpkb\fiveinrow\client\game\GenerateCodeWindow.class
+com\bpkb\fiveinrow\client\game\Menu.class
+com\bpkb\fiveinrow\server\host\ClientGame.class
+com\bpkb\fiveinrow\client\game\FiveInRowAI.class
+com\bpkb\fiveinrow\server\game\FiveInRowMultiplayer.class
+com\bpkb\fiveinrow\client\game\WinLogic.class
