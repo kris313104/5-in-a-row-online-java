@@ -24,8 +24,10 @@ public class Menu extends JFrame {
 
         JButton singlePC = createStyledButton("Single PC game");
         JButton multiPlayerButton = createStyledButton("Multiplayer");
+        JButton botButton = createStyledButton("VS Computer");
 
         addHoverEffect(singlePC);
+        addHoverEffect(botButton);
         addHoverEffect(multiPlayerButton);
 
         singlePC.addActionListener(e -> {
@@ -37,8 +39,14 @@ public class Menu extends JFrame {
             GenerateCodeWindow generateCodeWindow = new GenerateCodeWindow();
         });
 
+        botButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(FiveInRowAI::new);
+            dispose();
+        });
+
         buttonPanel.add(singlePC);
         buttonPanel.add(multiPlayerButton);
+        buttonPanel.add(botButton);
 
 
         add(buttonPanel, BorderLayout.CENTER);
