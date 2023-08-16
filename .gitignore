@@ -1,5 +1,5 @@
 HELP.md
-target/
+!target/5IR-0.1.jar
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
