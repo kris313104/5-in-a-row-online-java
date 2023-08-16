@@ -58,10 +58,11 @@ public class GenerateCodeWindow extends JFrame {
 //                this.dispose();
                 generateHost.setEnabled(false);
                 connectButton.setEnabled(false);
+                infoLabel.setText("Hosting...");
 
             } catch (NumberFormatException ex) {
                 System.out.println(ex);
-                infoLabel.setText("Invalid port");
+                infoLabel.setText("Invalid credentials");
             }
 
 
@@ -84,8 +85,8 @@ public class GenerateCodeWindow extends JFrame {
                 thread.start();
 
 //                this.dispose();
-                generateHost.setEnabled(false);
-                connectButton.setEnabled(false);
+//                generateHost.setEnabled(false);
+//                connectButton.setEnabled(false);
 
             } catch (NumberFormatException ex) {
                 System.out.println(ex);
@@ -93,14 +94,15 @@ public class GenerateCodeWindow extends JFrame {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(3, 1));
+        JPanel panel = new JPanel(new GridLayout(4, 1));
         panel.add(ipLabel);
         panel.add(ipTextField);
         panel.add(portLabel);
         panel.add(portTextField);
-        panel.add(infoLabel);
+
         panel.add(generateHost);
         panel.add(connectButton);
+        panel.add(infoLabel);
 
         getContentPane().add(panel);
         setLocationRelativeTo(null); // Center the window on the screen
