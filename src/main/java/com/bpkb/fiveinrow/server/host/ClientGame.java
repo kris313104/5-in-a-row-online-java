@@ -3,6 +3,7 @@ package com.bpkb.fiveinrow.server.host;
 import com.bpkb.fiveinrow.client.FiveinrowApplication;
 import com.bpkb.fiveinrow.client.game.FiveInRow;
 import com.bpkb.fiveinrow.client.game.GenerateCodeWindow;
+import com.bpkb.fiveinrow.server.game.FiveInRowMultiplayer;
 
 import javax.swing.*;
 import java.io.*;
@@ -10,22 +11,24 @@ import java.net.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClientGame {
+    private static Socket socket = null;
     public void initConnection(String host, int port){
 
         try {
-            Socket socket = new Socket(host, port); // Server address and port
+            socket = new Socket(host, port);
 
             // Create a thread for receiving messages from the server asynchronously
             Thread receiveThread = new Thread(() -> {
 
                 try {
 
-                    SwingUtilities.invokeLater(FiveInRow::new);
+                    SwingUtilities.invokeLater(FiveInRowMultiplayer::new);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String message;
                     while ((message = reader.readLine()) != null) {
                         System.out.println("Server: " + message);
-
+                        FiveInRowMultiplayer.setPlayer1_turn(false);
+                        FiveInRowMultiplayer.updateBoardState(Integer.parseInt(message));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -43,5 +46,9 @@ public class ClientGame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Socket getSocket() {
+        return socket;
     }
 }

@@ -1,24 +1,35 @@
-package com.bpkb.fiveinrow.client.game;
+package com.bpkb.fiveinrow.server.game;
+
+import com.bpkb.fiveinrow.client.game.WinLogic;
+import com.bpkb.fiveinrow.server.host.ClientGame;
+import com.bpkb.fiveinrow.server.host.HostGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Random;
 
-public class FiveInRow implements ActionListener {
-
+public class FiveInRowMultiplayer implements ActionListener {
+    Socket serverSocket;
+    Socket clientSocket;
     Random random = new Random();
-    boolean player1_turn;
+    static volatile boolean player1_turn;
 
     private JFrame mainFrame = new JFrame();
     private JPanel titlePanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
     private JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
-    private JLabel textfield2 = new JLabel();
-    private JButton[] buttons = new JButton[15 * 15];
+    private static JLabel textfield2 = new JLabel();
+    private static JButton[] buttons = new JButton[15 * 15];
 
-    public FiveInRow() {
+    public FiveInRowMultiplayer() {
         initializeUI();
         initializeButtons();
         firstTurn();
@@ -72,24 +83,41 @@ public class FiveInRow implements ActionListener {
     }
 
 
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(FiveInRow::new);
-//    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
+        serverSocket = HostGame.getSocket();
+        clientSocket = ClientGame.getSocket();
         for (int i = 0; i < buttons.length; i++) {
             if (e.getSource() == buttons[i]) {
                 if (buttons[i].getText().equals("")) {
-                    if (player1_turn) {
+                    if (player1_turn && clientSocket == null) {
                         buttons[i].setForeground(new Color(235, 219, 240));
                         buttons[i].setText("X");
                         textfield2.setText("Player 2 (O) turn");
-                    } else {
+                        player1_turn = !player1_turn;
+                        try {
+                            PrintWriter writer = new PrintWriter(serverSocket.getOutputStream(), true);
+                            writer.println(i);
+
+
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+//                        disableButtons();
+
+                    } else if (clientSocket != null && !player1_turn){
                         buttons[i].setForeground(new Color(235, 219, 240));
                         buttons[i].setText("O");
                         textfield2.setText("Player 1 (X) turn");
+                        player1_turn = !player1_turn;
+
+                        try {
+                            PrintWriter clientWriter = new PrintWriter(clientSocket.getOutputStream(), true);
+                            clientWriter.println(i);
+
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
 
                     // Check for a win after the move
@@ -103,10 +131,24 @@ public class FiveInRow implements ActionListener {
                         disableButtons(); // Disable buttons after a win
                     }
 
-                    player1_turn = !player1_turn;
+
                 }
             }
         }
+    }
+
+
+    public static synchronized void updateBoardState(int buttonIndex) {
+        if (player1_turn) {
+            buttons[buttonIndex].setText("O");
+            textfield2.setText("Player 1 (X) turn");
+        }
+        else {
+            buttons[buttonIndex].setText("X");
+            textfield2.setText("Player 2 (O) turn");
+        }
+
+
     }
 
     private char[][] getCurrentBoardState() {
@@ -122,17 +164,22 @@ public class FiveInRow implements ActionListener {
     }
 
     public void firstTurn(){
-        if(random.nextInt(2)==0){
             player1_turn = true;
             textfield2.setText("Player 1 (X) turn");
-        } else {
-            player1_turn = false;
-            textfield2.setText("Player 2 (O) turn");
-        }
     }
     private void disableButtons() {
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
     }
+
+    public static boolean isPlayer1_turn() {
+        return player1_turn;
+    }
+
+    public static void setPlayer1_turn(boolean player1_turn) {
+        FiveInRowMultiplayer.player1_turn = player1_turn;
+    }
+
+
 }
