@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bpkb.fiveinrow.client.game.controllers.MainMenuController">
+    <children>
+        <Button fx:id="game1" layoutX="196.0" layoutY="106.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="40.0" prefWidth="208.0" text="2 player game">
+            <font>
+                <Font size="19.0" />
+            </font></Button>
+        <Label fx:id="menuLabel" layoutX="93.0" layoutY="14.0" text="Five in a row game">
+            <font>
+                <Font size="50.0" />
+            </font></Label>
+      <Button fx:id="toggleStyleButton" layoutX="546.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchStyle" prefHeight="25.0" prefWidth="29.0" />
+      <Button fx:id="game2" layoutX="196.0" layoutY="154.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" text="Online multiplayer">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="game3" layoutX="197.0" layoutY="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" text="AI hard">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
