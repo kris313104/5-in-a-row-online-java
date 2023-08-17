@@ -11,12 +11,12 @@ public class FiveInRow implements ActionListener {
     Random random = new Random();
     boolean player1_turn;
 
-    private JFrame mainFrame = new JFrame();
-    private JPanel titlePanel = new JPanel();
-    private JPanel buttonPanel = new JPanel();
-    private JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
-    private JLabel textfield2 = new JLabel();
-    private JButton[] buttons = new JButton[15 * 15];
+    private final JFrame mainFrame = new JFrame();
+    private final JPanel titlePanel = new JPanel();
+    private final JPanel buttonPanel = new JPanel();
+    private final JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
+    private final JLabel textfield2 = new JLabel();
+    private final JButton[] buttons = new JButton[15 * 15];
 
     public FiveInRow() {
         initializeUI();

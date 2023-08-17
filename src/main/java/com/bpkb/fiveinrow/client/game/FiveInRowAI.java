@@ -11,13 +11,13 @@ public class FiveInRowAI implements ActionListener {
     Random random = new Random();
     boolean player1_turn;
 
-    private JFrame mainFrame = new JFrame();
-    private JPanel titlePanel = new JPanel();
-    private JPanel buttonPanel = new JPanel();
-    private JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
-    private JLabel textfield2 = new JLabel();
-    private JButton[] buttons = new JButton[15 * 15];
-    private AIplayer aiPlayer;
+    private final JFrame mainFrame = new JFrame();
+    private final JPanel titlePanel = new JPanel();
+    private final JPanel buttonPanel = new JPanel();
+    private final JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
+    private final JLabel textfield2 = new JLabel();
+    private static final JButton[] buttons = new JButton[15 * 15];
+    private final AIplayer aiPlayer;
 
     public FiveInRowAI() {
         initializeUI();
@@ -77,22 +77,26 @@ public class FiveInRowAI implements ActionListener {
         for (int i = 0; i < buttons.length; i++) {
             if (e.getSource() == buttons[i]) {
                 if (buttons[i].getText().equals("")) {
-
                     buttons[i].setForeground(new Color(235, 219, 240));
                     buttons[i].setText("X");
-                    aiPlayer.makeMove(buttons);
 
-                    char playerSymbol = player1_turn ? 'X' : 'O';
-                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, playerSymbol)) {
-                        if (player1_turn) {
-                            textfield2.setText("Player 1 (X) wins!");
-                        } else {
-                            textfield2.setText("Player 2 (O) wins!");
-                        }
+
+                    //x move and wins
+                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, 'X')) {
+                        textfield2.setText("Player 1 (X) wins!");
                         disableButtons();
+                        return;
                     }
 
-                    player1_turn = !player1_turn;
+                    //AIplayer move
+                    aiPlayer.makeMove(buttons);
+
+                    //ai move and win checking
+                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, 'O')) {
+                        textfield2.setText("AI Player (O) wins!");
+                        disableButtons();
+                        return;
+                    }
                 }
             }
         }
@@ -119,10 +123,13 @@ public class FiveInRowAI implements ActionListener {
             textfield2.setText("O turn");
         }
     }
-    private void disableButtons() {
+    public static void disableButtons() {
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
+    }
+    public static JButton[] getButtons() {
+        return buttons;
     }
 }
 
