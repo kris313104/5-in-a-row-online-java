@@ -72,7 +72,6 @@ public class FiveInRow implements ActionListener {
     }
 
 
-
 //    public static void main(String[] args) {
 //        SwingUtilities.invokeLater(FiveInRow::new);
 //    }
