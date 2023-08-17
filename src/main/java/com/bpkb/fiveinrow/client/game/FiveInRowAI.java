@@ -16,7 +16,7 @@ public class FiveInRowAI implements ActionListener {
     private final JPanel buttonPanel = new JPanel();
     private final JLabel textfield1 = new JLabel("Five in a Row", SwingConstants.LEFT); // Added text and alignment
     private final JLabel textfield2 = new JLabel();
-    private final JButton[] buttons = new JButton[15 * 15];
+    private static final JButton[] buttons = new JButton[15 * 15];
     private final AIplayer aiPlayer;
 
     public FiveInRowAI() {
@@ -123,10 +123,13 @@ public class FiveInRowAI implements ActionListener {
             textfield2.setText("O turn");
         }
     }
-    private void disableButtons() {
+    public static void disableButtons() {
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
+    }
+    public static JButton[] getButtons() {
+        return buttons;
     }
 }
 
