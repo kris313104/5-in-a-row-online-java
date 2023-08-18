@@ -3,6 +3,8 @@ module com.bpkb.fiveinrow.client.game{
     requires javafx.fxml;
     requires java.desktop;
     requires atlantafx.base;
+    requires javafx.base;
+    requires javafx.graphics;
 
     exports com.bpkb.fiveinrow.client to javafx.graphics;
 
