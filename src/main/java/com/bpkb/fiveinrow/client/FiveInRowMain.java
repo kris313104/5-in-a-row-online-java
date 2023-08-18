@@ -12,9 +12,7 @@ import java.util.Map;
 
 public class FiveInRowMain extends Application{
     public static void main(String[] args) throws IOException {
-//        System.out.println(FiveInRowMain.class.getResource("main-menu.fxml").toString());
         launch(args);
-
     }
 
     @Override
