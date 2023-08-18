@@ -21,11 +21,16 @@ public class MainMenuController {
 
     @FXML
     protected void switchStyle(ActionEvent event) {
-        if (Application.getUserAgentStylesheet().equals(PrimerDark.class)) {
-            Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
+        Button button = (Button)event.getSource();
+        PrimerDark dark = new PrimerDark();
+        PrimerLight light = new PrimerLight();
+        if (Application.getUserAgentStylesheet().equals(dark.getUserAgentStylesheet())) {
+            Application.setUserAgentStylesheet(light.getUserAgentStylesheet());
+            button.setText("Dark mode?");
         }
         else {
-            Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+            Application.setUserAgentStylesheet(dark.getUserAgentStylesheet());
+            button.setText("Light mode?");
         }
 
     }
