@@ -83,10 +83,10 @@ public class MainMenuController{
 
     @FXML
     private void onGameThreeButtonClick(ActionEvent event) throws IOException {
-        System.out.println("game2");
+        System.out.println("game3");
         FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("five-in-row-game.fxml"));
         // change controller class for different game mode
-        fxmlLoader.setController(new FiveInRowController());
+        fxmlLoader.setController(new FiveInRowAIController());
 
         root = fxmlLoader.load();
 
@@ -99,7 +99,4 @@ public class MainMenuController{
         stage.show();
 
     }
-
-
-
 }

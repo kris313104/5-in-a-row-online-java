@@ -1,17 +1,15 @@
 package com.bpkb.fiveinrow.client.game.controllers;
 
 import com.bpkb.fiveinrow.client.game.WinLogic;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.event.ActionEvent;
 
 
 
-public class FiveInRowController {
+public class FiveInRowAIController {
     private boolean player1_turn = true;
     @FXML
     private Text turnLabel;
@@ -19,7 +17,10 @@ public class FiveInRowController {
     @FXML
     private GridPane gridPane;
 
-    private Button[] buttons = new Button[15*15];
+    private final AI ai = new AI();
+
+
+    private static Button[] buttons = new Button[15*15];
     @FXML
     private void initialize() {
 
@@ -40,32 +41,32 @@ public class FiveInRowController {
         for (int i = 0; i < buttons.length; i++) {
             if (e.getSource() == buttons[i]) {
                 if (buttons[i].getText().equals("")) {
-                    if (player1_turn) {
 
-                        buttons[i].setText("X");
-                        turnLabel.setText("Player 2 (O) turn");
-                    } else {
 
-                        buttons[i].setText("O");
-                        turnLabel.setText("Player 1 (X) turn");
+
+                    buttons[i].setText("X");
+                    turnLabel.setText("Player 2 (O) turn");
+
+                    //x move and wins
+                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, 'X')) {
+
+                        disableButtons();
+                        return;
                     }
 
-                    // Check for a win after the move
-                    char playerSymbol = player1_turn ? 'X' : 'O';
-                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, playerSymbol)) {
-                        if (player1_turn) {
-                            turnLabel.setText("Player 1 (X) wins!");
-                        } else {
-                            turnLabel.setText("Player 2 (O) wins!");
-                        }
-                        disableButtons(); // Disable buttons after a win
-                    }
+                    //AIplayer move
+                    ai.makeMove(buttons);
+                    turnLabel.setText("Player 1 (X) turn");
 
-                    player1_turn = !player1_turn;
+                    //ai move and win checking
+                    if (WinLogic.checkWin(getCurrentBoardState(), i / 15, i % 15, 'O')) {
+
+                        disableButtons();
+                        return;
+                    }
                 }
             }
         }
-
     }
     private char[][] getCurrentBoardState() {
         char[][] board = new char[15][15];
@@ -78,10 +79,14 @@ public class FiveInRowController {
         }
         return board;
     }
-    private void disableButtons() {
+    public static void disableButtons() {
         for (Button button : buttons) {
             button.setDisable(true);
         }
     }
+    public static Button[] getButtons() {
+        return buttons;
+    }
 }
+
 

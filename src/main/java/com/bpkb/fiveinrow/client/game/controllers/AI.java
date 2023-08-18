@@ -1,16 +1,18 @@
-package com.bpkb.fiveinrow.client.game;
+package com.bpkb.fiveinrow.client.game.controllers;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
+import com.bpkb.fiveinrow.client.game.WinLogic;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class AIplayer {
+public class AI {
 
     private final Random random = new Random();
 
-    public void makeMove(JButton[] buttons) {
+    public void makeMove(Button[] buttons) {
         List<Integer> winningMoves = new ArrayList<>();
         List<Integer> blockingMoves = new ArrayList<>();
         List<Integer> emptyIndices = new ArrayList<>();
@@ -26,9 +28,9 @@ public class AIplayer {
                 } else if (isPotentialBlockingMove(buttons, i, "X")) {
                     blockingMoves.add(i);
                 }
-                if (WinLogic.checkWin(getCurrentBoardState(FiveInRowAI.getButtons()), i / 15, i % 15, 'O')) {
+                if (WinLogic.checkWin(getCurrentBoardState(FiveInRowAIController.getButtons()), i / 15, i % 15, 'O')) {
                     buttons[i].setText("O");
-                    FiveInRowAI.disableButtons();
+                 FiveInRowAIController.disableButtons();
                     return;
                 }
             }
@@ -44,30 +46,29 @@ public class AIplayer {
             int randomIndex = emptyIndices.get(random.nextInt(emptyIndices.size()));
             placeMove(buttons, randomIndex, "O");
         }
-
     }
 
-    private boolean isWinningMove(JButton[] buttons, int index, String symbol) {
+    private boolean isWinningMove(Button[] buttons, int index, String symbol) {
         buttons[index].setText(symbol);
         boolean isWinning = WinLogic.checkWin(getCurrentBoardState(buttons), index / 15, index % 15, symbol.charAt(0));
         buttons[index].setText("");  // Reset the button
         return isWinning;
     }
 
-    private boolean isPotentialBlockingMove(JButton[] buttons, int index, String symbol) {
+    private boolean isPotentialBlockingMove(Button[] buttons, int index, String symbol) {
         buttons[index].setText(symbol);
         boolean isPotentialBlocking = hasPotentialWinningSequence(buttons, index, symbol);
         buttons[index].setText("");  // Reset the button
         return isPotentialBlocking;
     }
 
-    private boolean hasPotentialWinningSequence(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialWinningSequence(Button[] buttons, int index, String symbol) {
         return hasPotentialRow(buttons, index, symbol) ||
                 hasPotentialColumn(buttons, index, symbol) ||
                 hasPotentialDiagonal(buttons, index, symbol);
     }
 
-    private boolean hasPotentialRow(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialRow(Button[] buttons, int index, String symbol) {
         int row = index / 15;
         int col = index % 15;
         int count = 0;
@@ -91,7 +92,7 @@ public class AIplayer {
         return count >= 3;
     }
 
-    private boolean hasPotentialColumn(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialColumn(Button[] buttons, int index, String symbol) {
         int row = index / 15;
         int col = index % 15;
         int count = 0;
@@ -115,12 +116,12 @@ public class AIplayer {
         return count >= 3;
     }
 
-    private boolean hasPotentialDiagonal(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialDiagonal(Button[] buttons, int index, String symbol) {
         return hasPotentialDiagonal1(buttons, index, symbol) ||
                 hasPotentialDiagonal2(buttons, index, symbol);
     }
 
-    private boolean hasPotentialDiagonal1(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialDiagonal1(Button[] buttons, int index, String symbol) {
         int row = index / 15;
         int col = index % 15;
         int count = 0;
@@ -144,7 +145,7 @@ public class AIplayer {
         return count >= 3;
     }
 
-    private boolean hasPotentialDiagonal2(JButton[] buttons, int index, String symbol) {
+    private boolean hasPotentialDiagonal2(Button[] buttons, int index, String symbol) {
         int row = index / 15;
         int col = index % 15;
         int count = 0;
@@ -168,12 +169,12 @@ public class AIplayer {
         return count >= 3;
     }
 
-    private void placeMove(JButton[] buttons, int index, String symbol) {
-        buttons[index].setForeground(new Color(235, 219, 240));
+    private void placeMove(Button[] buttons, int index, String symbol) {
+        buttons[index].setTextFill(Color.rgb(235, 219, 240));
         buttons[index].setText(symbol);
     }
 
-    private char[][] getCurrentBoardState(JButton[] buttons) {
+    private char[][] getCurrentBoardState(Button[] buttons) {
         char[][] board = new char[15][15];
         for (int i = 0; i < buttons.length; i++) {
             char symbol = buttons[i].getText().isEmpty() ? ' ' : buttons[i].getText().charAt(0);
