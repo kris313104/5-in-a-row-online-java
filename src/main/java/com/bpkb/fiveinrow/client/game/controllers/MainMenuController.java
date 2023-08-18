@@ -14,8 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
 
 
 public class MainMenuController{
@@ -59,8 +57,11 @@ public class MainMenuController{
 
         root = fxmlLoader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root, 800, 900);
+
         stage.setScene(scene);
+//        stage.setFullScreen(true);
+        stage.setHeight(0);
         stage.show();
 
     }
@@ -88,8 +89,12 @@ public class MainMenuController{
         fxmlLoader.setController(new FiveInRowController());
 
         root = fxmlLoader.load();
+
+
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+
         stage.setScene(scene);
         stage.show();
 
