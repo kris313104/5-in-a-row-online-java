@@ -39,10 +39,7 @@ public class Menu extends JFrame {
             GenerateCodeWindow generateCodeWindow = new GenerateCodeWindow();
         });
 
-        botButton.addActionListener(e -> {
-            SwingUtilities.invokeLater(FiveInRowAI::new);
-            dispose();
-        });
+
 
         buttonPanel.add(singlePC);
         buttonPanel.add(multiPlayerButton);
