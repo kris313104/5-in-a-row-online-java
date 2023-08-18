@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="turnLabel" layoutX="539.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1 (X) turn">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Five in a row">
+               <font>
+                  <Font size="51.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
    </top>
    <center>
       <GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
