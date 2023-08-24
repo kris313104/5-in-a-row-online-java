@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bpkb.fiveinrow.server.host.controllers.MultiplayerLobbyController">
+    <children>
+        <Label fx:id="menuLabel" layoutX="93.0" layoutY="14.0" text="Multiplayer lobby">
+            <font>
+                <Font size="50.0" />
+            </font></Label>
+      <TabPane layoutX="3.0" layoutY="87.0" prefHeight="313.0" prefWidth="592.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="joinGameTab" text="Join game">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="ipLabel" layoutX="74.0" layoutY="34.0" text="Enter ip address">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="portLabel" layoutX="74.0" layoutY="98.0" text="Enter port">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="ipAddressTextBox" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="235.0" />
+                        <TextField fx:id="portTextField" layoutX="273.0" layoutY="101.0" prefHeight="25.0" prefWidth="90.0" />
+                        <Label fx:id="ipInfoLabel" layoutX="274.0" layoutY="64.0" prefHeight="22.0" prefWidth="234.0" />
+                        <Label fx:id="portInfoLabel" layoutX="274.0" layoutY="131.0" prefHeight="22.0" prefWidth="234.0" />
+                        <Button fx:id="joinGameButton" layoutX="236.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Join game">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="hostGameTab" text="Host game">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="hostPortTextBox" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="90.0" />
+                        <Label fx:id="hostPortLabel" layoutX="74.0" layoutY="34.0" text="Enter port">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hostPortInfoLabel" layoutX="273.0" layoutY="64.0" prefHeight="17.0" prefWidth="265.0" />
+                        <Label layoutX="37.0" layoutY="211.0" prefHeight="45.0" prefWidth="518.0" text="Waiting for another player to connect...">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="hostGameButton" layoutX="236.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Host game">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+    </children>
+</AnchorPane>

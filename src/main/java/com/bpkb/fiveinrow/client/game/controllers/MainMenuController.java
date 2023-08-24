@@ -69,9 +69,9 @@ public class MainMenuController{
     @FXML
     private void onGameTwoButtonClick(ActionEvent event) throws IOException {
         System.out.println("game2");
-        FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("five-in-row-game.fxml"));
+        FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("lobby.fxml"));
         // change controller class for different game mode
-        fxmlLoader.setController(new FiveInRowController());
+//        fxmlLoader.setController(new FiveInRowController());
 
         root = fxmlLoader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

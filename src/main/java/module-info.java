@@ -15,4 +15,6 @@ module com.bpkb.fiveinrow.client.game{
     exports com.bpkb.fiveinrow.client.game;
     exports com.bpkb.fiveinrow.client.game.controllers;
 
+    exports com.bpkb.fiveinrow.server.host.controllers to javafx.fxml;
+
 }
