@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bpkb.fiveinrow.server.host.controllers.MultiplayerLobbyController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bpkb.fiveinrow.server.host.controllers.MultiplayerLobbyController">
     <children>
         <Label fx:id="menuLabel" layoutX="93.0" layoutY="14.0" text="Multiplayer lobby">
             <font>
@@ -30,7 +30,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ipAddressTextBox" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="235.0" />
+                        <TextField fx:id="ipAddressTextField" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="235.0" />
                         <TextField fx:id="portTextField" layoutX="273.0" layoutY="101.0" prefHeight="25.0" prefWidth="90.0" />
                         <Label fx:id="ipInfoLabel" layoutX="274.0" layoutY="64.0" prefHeight="22.0" prefWidth="234.0" />
                         <Label fx:id="portInfoLabel" layoutX="274.0" layoutY="131.0" prefHeight="22.0" prefWidth="234.0" />
@@ -47,7 +47,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="hostPortTextBox" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="90.0" />
+                        <TextField fx:id="hostPortTextField" layoutX="273.0" layoutY="36.0" prefHeight="25.0" prefWidth="90.0" />
                         <Label fx:id="hostPortLabel" layoutX="74.0" layoutY="34.0" text="Enter port">
                            <font>
                               <Font size="20.0" />

@@ -17,6 +17,7 @@ import java.io.IOException;
 
 
 public class MainMenuController{
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -29,7 +30,8 @@ public class MainMenuController{
     @FXML
     private Button game3;
 
-
+    @FXML
+    public Button game4;
 
 
     @FXML
@@ -68,7 +70,6 @@ public class MainMenuController{
 
     @FXML
     private void onGameTwoButtonClick(ActionEvent event) throws IOException {
-        System.out.println("game2");
         FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("lobby.fxml"));
         // change controller class for different game mode
 //        fxmlLoader.setController(new FiveInRowController());
@@ -83,7 +84,23 @@ public class MainMenuController{
 
     @FXML
     private void onGameThreeButtonClick(ActionEvent event) throws IOException {
-        System.out.println("game3");
+        FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("five-in-row-game.fxml"));
+        // change controller class for different game mode
+        fxmlLoader.setController(new FiveInRowAIController());
+
+        root = fxmlLoader.load();
+
+
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    private void onGameFourButtonClick(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader =new FXMLLoader(FiveInRowMain.class.getResource("five-in-row-game.fxml"));
         // change controller class for different game mode
         fxmlLoader.setController(new FiveInRowAIController());
