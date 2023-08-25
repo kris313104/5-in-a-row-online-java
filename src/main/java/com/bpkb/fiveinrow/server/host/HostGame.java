@@ -27,9 +27,7 @@ public class HostGame {
 
             // Create a thread for receiving messages from the client asynchronously
             Thread receiveThread = new Thread(() -> {
-
                 try {
-
                     SwingUtilities.invokeLater(FiveInRowMultiplayer::new);
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

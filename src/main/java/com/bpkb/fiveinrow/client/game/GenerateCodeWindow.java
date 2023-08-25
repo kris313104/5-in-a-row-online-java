@@ -50,12 +50,9 @@ public class GenerateCodeWindow extends JFrame {
                         window.dispose();
                     }
                 });
-//                for (JFrame window : FiveinrowApplication.openWindows) {
-//                    window.dispose();
-//                }
+
                 thread.start();
 
-//                this.dispose();
                 generateHost.setEnabled(false);
                 connectButton.setEnabled(false);
                 infoLabel.setText("Hosting...");

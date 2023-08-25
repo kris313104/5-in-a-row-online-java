@@ -12,6 +12,7 @@ module com.bpkb.fiveinrow.client.game{
     opens com.bpkb.fiveinrow.client to javafx.fxml;
     opens com.bpkb.fiveinrow.client.game to javafx.fxml;
     opens com.bpkb.fiveinrow.client.game.controllers to javafx.fxml;
+    opens com.bpkb.fiveinrow.server.host.controllers to javafx.fxml;
     exports com.bpkb.fiveinrow.client.game;
     exports com.bpkb.fiveinrow.client.game.controllers;
 
